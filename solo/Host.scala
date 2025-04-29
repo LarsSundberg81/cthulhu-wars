@@ -97,8 +97,11 @@ object Host {
                         game = new Game(EarthMap4v35, RitualTrack.for4, randomSeating(ff), true, Nil)
                         //game = new Game(EarthMap4v53, RitualTrack.for4, randomSeating(ff), true, $(AltMap))
                     }
-                    else {
+                    else if (numberOfPlayers == 5) {
                         game = new Game(EarthMap5, RitualTrack.for5, randomSeating(ff), true, Nil)
+                    }
+                    else {
+                        game = new Game(EarthMap6, RitualTrack.for6, randomSeating(ff), true, Nil)
                     }
 
                     val (l, cc) = game.perform(StartAction)

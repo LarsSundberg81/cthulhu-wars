@@ -552,6 +552,7 @@ object RitualTrack {
     val for3 = 5 :: 6 :: 7 :: 8 :: 9 :: 10 :: 999
     val for4 = 5 :: 6 :: 7 :: 7 :: 8 :: 8 :: 9 :: 10 :: 999
     val for5 = 5 :: 6 :: 6 :: 7 :: 7 :: 8 :: 8 :: 9 :: 9 :: 10 :: 999
+    val for6 = 5 :: 6 :: 6 :: 7 :: 7 :: 7 :: 8 :: 8 :: 8 :: 9 :: 9 :: 10 :: 999
 }
 
 case class Nexus(region : Region, attacker : Faction, defender : Faction, factions : List[Faction], acted : Boolean, battled : List[Region])
@@ -576,6 +577,7 @@ case object MapEarth33 extends MapOption
 case object MapEarth35 extends MapOption
 case object MapEarth53 extends MapOption
 case object MapEarth55 extends MapOption
+case object MapEarth66 extends MapOption
 
 case class PlayerCount(n : Int) extends GameOption
 

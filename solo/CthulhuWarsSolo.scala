@@ -46,6 +46,7 @@ class Setup(factions : $[Faction], diff : Difficulty) {
         case 3 => MapEarth33
         case 4 => MapEarth35
         case 5 => MapEarth55
+        case 6 => MapEarth66
     })
 
     def toggle(go : GameOption) {
@@ -266,7 +267,7 @@ object CthulhuWarsSolo {
             None
         }
 
-        var statuses = List(getElem("status-1"), getElem("status-2"), getElem("status-3"), getElem("status-4"), getElem("status-5"))
+        var statuses = List(getElem("status-1"), getElem("status-2"), getElem("status-3"), getElem("status-4"), getElem("status-5"), getElem("status-6"))
 
         val mapWest = getElem("map-west")
         val mapEast = getElem("map-east")
@@ -355,12 +356,14 @@ object CthulhuWarsSolo {
                 case Some(MapEarth35) | None => EarthMap4v35
                 case Some(MapEarth53) => EarthMap4v53
                 case Some(MapEarth55) => EarthMap5
+                case Some(MapEarth66) => EarthMap6
             }
 
             val track = seating.num @@ {
                 case 3 => RitualTrack.for3
                 case 4 => RitualTrack.for4
                 case 5 => RitualTrack.for5
+                case 6 => RitualTrack.for6
             }
 
             var game = new Game(board, track, seating, true, setup.options)
@@ -1282,7 +1285,7 @@ object CthulhuWarsSolo {
                         }
                         n -= 1
                         if (n == 0) {
-                            val all = $(MapEarth33, MapEarth35, MapEarth53, MapEarth55)
+                            val all = $(MapEarth33, MapEarth35, MapEarth53, MapEarth55, MapEarth66)
                             setup.options = setup.options.notOf[MapOption] :+ (all.dropWhile(setup.options.of[MapOption].lastOption.has(_).not).drop(1) ++ all).first
                             setupQuestions()
                         }
@@ -1359,7 +1362,7 @@ object CthulhuWarsSolo {
                         }
                         n -= 1
                         if (n == 0) {
-                            val all = $(MapEarth33, MapEarth35, MapEarth53, MapEarth55)
+                            val all = $(MapEarth33, MapEarth35, MapEarth53, MapEarth55, MapEarth66)
                             setup.options = setup.options.notOf[MapOption] :+ (all.dropWhile(setup.options.of[MapOption].lastOption.has(_).not).drop(1) ++ all).first
                             setupQuestions()
                         }
@@ -1469,8 +1472,8 @@ object CthulhuWarsSolo {
                         setup.difficulty += faction -> Human
                         startGame(setup)
                     case 1 =>
-                        ask("Players", ("3 Players" :: "4 Players" :: "5 Players") :+ "Back", n => {
-                            if (n < 3) {
+                        ask("Players", ("3 Players" :: "4 Players" :: "5 Players" :: "6 Players") :+ "Back", n => {
+                            if (n < 4) {
                                 val pn = n + 3
                                 val combinations = allFactions.combinations(pn).toList
                                 ask("Choose factions", combinations./(_.mkString(", "))./(smaller) :+ "Back", n => {
@@ -1484,8 +1487,8 @@ object CthulhuWarsSolo {
                                 topMenu()
                         })
                     case 2 =>
-                        ask("Players", ("3 Players" :: "4 Players" :: "5 Players") :+ "Back", n => {
-                            if (n < 3) {
+                        ask("Players", ("3 Players" :: "4 Players" :: "5 Players" :: "6 Players") :+ "Back", n => {
+                            if (n < 4) {
                                 val pn = n + 3
                                 val combinations = allFactions.combinations(pn).toList
                                 ask("Choose factions", combinations./(_.mkString(", "))./(smaller) :+ "Back", n => {
